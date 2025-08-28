@@ -34,6 +34,24 @@ curl -X POST http://localhost:8080/posts -H "Content-Type: application/json" -d 
 curl -X POST http://localhost:8080/posts -H "Content-Type: application/json" -d "{\"title\":\"test\",\"content\":\"hello\"}"
 
 ```
+
+# Автоматический деплой
+
+Настроен через GitHub Actions:
+
+При push в ветку `main` автоматически:
+- собирается Docker-образ;
+- подключается по SSH к серверу;
+- обновляется код (`git pull`);
+- пересобираются и запускаются контейнеры (`docker-compose up -d --build`).
+
+# Необходимые секреты GitHub
+
+- `SERVER_HOST` — IP или домен сервера
+- `SERVER_USER` — SSH-пользователь
+- `SSH_PRIVATE_KEY` — приватный SSH-ключ
+- `SERVER_PORT` (опционально) — порт SSH (по умолчанию 22)
+
 # Технологии
 - Python 3.12
 - Postgresql 11.5
