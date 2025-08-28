@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:11.5
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: blog
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./logs/db.log:/var/log/postgresql/postgres.log
+    restart: always
+
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: blog
+      POSTGRES_HOST: db
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs/app.log:/app/app.log
+    restart: always
+
+volumes:
+  db_data:
