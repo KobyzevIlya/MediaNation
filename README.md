@@ -1,6 +1,14 @@
+# Приложение
+```
+http://176.108.245.158:8080/posts
+```
+
 # Запуск
 ```
 git clone https://github.com/KobyzevIlya/MediaNation
+cd MediaNation
+sudo chown 999:999 logs
+docker compose up -d --build
 ```
 # API
 ```
@@ -27,11 +35,18 @@ Response:
 # Проверка
 ```
 curl http://localhost:8080/posts
+
+curl http://176.108.245.158:8080/posts
+
 curl -X POST http://localhost:8080/posts -H "Content-Type: application/json" -d '{"title":"test","content":"hello"}'
+
+curl -X POST http://176.108.245.158:8080/posts -H "Content-Type: application/json" -d '{"title":"test","content":"hello"}'
 ```
 Для cmd
 ```
 curl -X POST http://localhost:8080/posts -H "Content-Type: application/json" -d "{\"title\":\"test\",\"content\":\"hello\"}"
+
+curl -X POST http://176.108.245.158:8080/posts -H "Content-Type: application/json" -d "{\"title\":\"test\",\"content\":\"hello\"}"
 
 ```
 
